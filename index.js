@@ -3,6 +3,8 @@ const express=require('express');
 const bodyParser = require('body-parser');
 const env=require('dotenv');
 
+const Movie=require('./models/movie.model');
+
 const mongoose=require('mongoose');
 
 env.config();
@@ -22,7 +24,23 @@ app.listen(process.env.PORT,async ()=>{
     //this callback function gets executed once we successfully start the server on given port
     console.log(`server started on port:${process.env.PORT}`);
 
-    await mongoose.connect(process.env.DB_URL);
-    console.log("successfully connected to mongodb");
+    try{
+        await mongoose.connect(process.env.DB_URL);
+        console.log("connected to mongo");
+
+        // await Movie.create({
+        //     name:"Example Movie",
+        //     description:"sample Movie descrp",
+        //     casts:["c1","c2"],
+        //     director:"sample",
+        //     trailerUrl:"http://example/trailer/1",
+        //     language:"Hindi",
+        //     releaseDate:"18-03-2026",
+        //     releaseStatus:"RELEASE"
+        // });
+
+    }catch(err){
+        console.log("not connected to mongo",err);
+    }
 });
  
