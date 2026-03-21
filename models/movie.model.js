@@ -43,3 +43,4 @@ const movieSchema=new mongoose.Schema({
 const Movie=mongoose.model('Movie',movieSchema);// createing the new model using movieschema and will be used to perform CRUD operations on the movie collection in the db
 
 module.exports=Movie; //returning the Movie model to be used in other files
+
