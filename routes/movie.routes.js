@@ -16,7 +16,7 @@ const routes=(app)=>{
 
     app.get(
         '/mba/api/v1/movies/:id',
-        MovieController.getMovie
+        MovieController.getMovie   
     )
 }
 
