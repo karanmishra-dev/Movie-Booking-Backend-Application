@@ -10,13 +10,13 @@ const routes=(app)=>{
     );
 
     app.delete(
-        '/mba/api/v1/:id',
+        '/mba/api/v1/movies/:id',
         movieController.deleteMovie
     );
 
     app.get(
         '/mba/api/v1/movies/:id',
-        MovieController.getMovie   
+        movieController.getMovie  
     )
 }
 
