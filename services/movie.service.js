@@ -12,7 +12,7 @@ const createMovie=async(data)=>{
             });
             console.log(err);
             return{err:err,code:422
-            };
+            }; 
         }
         else{
             throw error;
