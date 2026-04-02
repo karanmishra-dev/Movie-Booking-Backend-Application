@@ -37,8 +37,27 @@ const getMovieById=async(id)=>{
     return await Movie.findById(id);
 }
 
+const updateMovie=async(id,data)=>{
+    try{
+        const movie=await Movie.findByIdAndUpdate(id,data,{new:true,runValidators:true});
+        return movie;
+    } catch(error){
+        if(err.name=='ValidationError'){
+            let error={};
+            Object.keys(error.errors).forEach((key)=>{
+                err[key]=error.errors[key].message;
+            });
+            console.log(err);
+            return{err:err,code:422
+            };
+        } else{
+            throw error;
+        }
+    }
+}
 module.exports={
     createMovie,
     deleteMovie,
-    getMovieById 
+    getMovieById,
+    updateMovie
 }
