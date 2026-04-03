@@ -45,7 +45,7 @@ const updateMovie=async(id,data)=>{
         if(err.name=='ValidationError'){
             let error={};
             Object.keys(error.errors).forEach((key)=>{
-                err[key]=error.errors[key].message;
+                 err[key]=error.errors[key].message;
             });
             console.log(err);
             return{err:err,code:422
@@ -55,9 +55,26 @@ const updateMovie=async(id,data)=>{
         }
     }
 }
+
+const fetchMovies=async(filter)=>{
+    let query={};
+    if(filter.name){
+        query.name=filter.name;
+    }
+    let movies=await Movie.find(query);
+    if(!movies){
+        return{
+            err:'Not able to find the queries movies',
+            code:404
+        }
+    }
+    return movies;
+}
+
 module.exports={
     createMovie,
     deleteMovie,
     getMovieById,
-    updateMovie
+    updateMovie,
+    fetchMovies
 }
