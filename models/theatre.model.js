@@ -20,6 +20,6 @@ const theatreSchema=new mongoose.Schema({
     address:String
 },{timestamps:true});
 
-const theatre=mongoose.model('theatre',theatreSchema);
+const Theatre=mongoose.model('Theatre',theatreSchema);
 
-module.exports=theatre;  
+module.exports=Theatre ;  
