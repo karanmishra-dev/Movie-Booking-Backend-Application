@@ -1,12 +1,16 @@
-
+/* 
+this object will be used as a template for building error responses
+*/
 const errorResponseBody={
     err:{},
     data:{},
     message:"Something went wrong, cannot find the movie requested",
     success:false
 }
-
-const successResponseBody={
+/*
+This object will bve used as a template for building success response
+*/
+const successResponseBody={  
     err:{},
     data:{},
     message:'Successfully processed the request',
