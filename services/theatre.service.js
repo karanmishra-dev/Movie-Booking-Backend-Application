@@ -60,9 +60,59 @@ const getAllTheatres=async()=>{
    }
 }
 
+const updateTheatre=async(id,data)=>{
+    try{
+        const response=await Theatre.findByIdAndUpdate(id,data,{new:true,runValidator:true
+        });
+        if(!response){
+            //no record found for the given id 
+            return{
+                err:"No theatre found for the given id",
+                code:404
+            }
+        }
+        return response;
+    } catch(error){
+        if(error.name=='ValidationError'){
+            let err={};
+            Object.keys(error.errors).forEach((key)=>{
+                err[key]=error.errors[key].message;
+            });
+            return {err:err, code:422};
+        }
+        throw error;
+    }
+
+}
+
+
+const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
+    const theatre=await Theatre.findById(theatreId);
+    if(!theatre){
+        return {
+            err:"No such theatre found for the id provided",
+            code:404
+        };
+    }
+    if(insert){
+        movieIds.forEach(movieId=>{
+            theatre.movies.push(movieId);
+        });
+    } else{
+        let savedMovieIds=theatre.movies;
+        movieIds.forEach(movieId=>{
+            savedMovieIds=savedMovieIds.filter(smi=> smi==movieId);
+        });
+        theatre.movies=savedMovieIds;
+    }
+    await theatre.save();
+    return theatre;
+}
+
 module.exports={
     createTheatre,
     deleteTheatre,
     getTheatre,
-    getAllTheatres
+    getAllTheatres,
+    updateTheatre
 }
