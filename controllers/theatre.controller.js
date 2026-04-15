@@ -51,9 +51,8 @@ const getTheatre=async(req,res)=>{
 } 
 
 const getTheatres=async(req,res)=>{
-    const response=await theatreService.getAllTheatres();
     try{
-        const response=await theatreService.getAllTheatres();
+        const response=await theatreService.getAllTheatres(req.query);
         successResponseBody.data=response;
         successResponseBody.message="Succesfully fetched all theatres";
         return res.status(200).json(successResponseBody);
