@@ -50,14 +50,19 @@ const getTheatre=async (id)=>{
     }
 }
 
-const getAllTheatres=async()=>{
-   try{
-    const response=await Theatre.find({});
-    return response;
-   } catch(error){
-    console.log(error);
-    throw error;
-   }
+const getAllTheatres=async(data)=>{
+    try{
+        let query={};
+        if(data && data.city){
+            query.city=data.city;
+                
+        }
+        const response=await Theatre.find(query);
+        return response;
+    } catch(error){
+        console.log(error);
+        throw error;
+    }
 }
 
 const updateTheatre=async(id,data)=>{
