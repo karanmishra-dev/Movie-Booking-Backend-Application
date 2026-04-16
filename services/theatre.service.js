@@ -52,10 +52,9 @@ const getTheatre=async (id)=>{
 
 const getAllTheatres=async(data)=>{
     try{
-        let query={};
+        let query={};  
         if(data && data.city){
-            query.city=data.city;
-                
+            query.city=data.city;     
         }
         const response=await Theatre.find(query);
         return response;
@@ -113,11 +112,12 @@ const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
     await theatre.save();
     return theatre;
 }
-
+ 
 module.exports={
     createTheatre,
     deleteTheatre,
     getTheatre,
     getAllTheatres,
-    updateTheatre
+    updateTheatre, 
+    updateMoviesInTheatres 
 }
