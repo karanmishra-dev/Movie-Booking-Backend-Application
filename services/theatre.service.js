@@ -110,7 +110,7 @@ const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
         theatre.movies=savedMovieIds;
     }
     await theatre.save();
-    return theatre;
+    return theatre.populate('movies');
 }
  
 module.exports={

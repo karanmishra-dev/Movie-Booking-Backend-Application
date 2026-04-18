@@ -23,7 +23,7 @@ const validateTheatreCreateRequest=async (req,res,next)=>{
 
 const validateUpdateMoviesRequest= async(req,res,next)=>{
     //validation of insert parameter in the request body
-    if(!req.body.insert){
+    if(req.body.insert==undefined){
         errorResponseBody.message="The insert parameter is missing in the request";
         return res.status(400).json(errorResponseBody);
     }
@@ -50,4 +50,4 @@ module.exports={
     validateTheatreCreateRequest,
     validateUpdateMoviesRequest
 
-}
+} 
