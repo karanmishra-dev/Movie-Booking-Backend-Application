@@ -54,8 +54,15 @@ const getAllTheatres=async(data)=>{
     try{
         let query={};  
         if(data && data.city){
+            //this checks whether the city is present in query params or not
             query.city=data.city;     
         }
+        if(data && data.pincode){
+            query.pincode=data.pincode;
+        }
+        if(data && data.name){
+            query.name=data.name;
+        } 
         const response=await Theatre.find(query);
         return response;
     } catch(error){
@@ -110,7 +117,7 @@ const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
         theatre.movies=savedMovieIds;
     }
     await theatre.save();
-    return theatre;
+    return theatre.populate('movies');
 }
  
 module.exports={
