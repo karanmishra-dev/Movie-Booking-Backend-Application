@@ -107,24 +107,23 @@ const updateTheatre=async(id,data)=>{
 
 const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
     try{
+        let theatre;
         if(insert){
-        //we need to add movies
-        // movieIds.forEach(movieId=>{
-        //     theatre.movies.push(movieId);
-        // });
-        await Theatre.updateOne(
-            {_id:theatreId},
-            {$addToSet  :{movies:{$each:movieIds}}}
-        );
+            //we need to add movie
+            theatre=await Theatre.findByIdAndUpdate(
+                {_id:theatreId},
+                {$addToSet:{movies:{$each:movieIds}}},
+                {new:true}
+            );
 
         } 
         else{
-            await Theatre.updateOne(
+            theatre=await Theatre.findByIdAndUpdate(
                 {_id:theatreId},
-                {$pull:{movies:{$in:movieIds}}}
+                {$pull:{movies:{$in:movieIds}}},
+                {new:true}
             );
         }
-        const theatre=await Theatre.findById(theatreId); 
         // await theatre.save();
         return theatre.populate('movies');
     }catch(error){
@@ -137,7 +136,7 @@ const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
         console.log("Error is", error);
         throw error;
     }
-}
+} 
  
 module.exports={ 
     createTheatre,
