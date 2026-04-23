@@ -1,5 +1,5 @@
 const Theatre=require('../models/theatre.model');
-
+const Movie=require('../models/movie.model');
 const createTheatre=async(data)=>{
     try{
         const response=await Theatre.create(data);
@@ -64,6 +64,10 @@ const getAllTheatres=async(data)=>{
         if(data && data.name){
             query.name=data.name;
         } 
+        if(data && data.movieId){
+            // let movie=await Movie.findById(data.movieId);
+            query.movies={$all:data.movieId };
+        }
         if(data && data.limit){
             pagination.limit=data.limit;
         }
@@ -137,7 +141,7 @@ const updateMoviesInTheatres=async(theatreId, movieIds,insert)=>{
         throw error;
     }
 } 
- 
+  
 module.exports={ 
     createTheatre,
     deleteTheatre,
