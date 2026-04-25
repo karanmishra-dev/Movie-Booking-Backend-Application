@@ -41,7 +41,13 @@ const routes=(app)=>{
     app.get(
         '/mba/api/v1/theatres/:id/movies',
         theatreController.getMovies
-    )
+    );
+
+    app.get(
+        '/mba/api/v1/theatres/:theatreId/movies/:movieId',
+        theatreController.checkMovie
+    );
+
 
 }
  
