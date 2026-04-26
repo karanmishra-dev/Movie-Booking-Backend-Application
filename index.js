@@ -10,6 +10,8 @@ const MovieRoutes=require('./routes/movie.routes');
 env.config();
 
 const theatreRoutes=require('./routes/theatre.routes')
+
+const authRoutes=require('./routes/auth.routes');
 const app=express();//express app object
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -20,6 +22,8 @@ mongoose.set('debug',true);
 MovieRoutes(app); //invoking movies routes
   
 theatreRoutes(app);// invoking theatre routes 
+
+authRoutes(app); //involing auth routes
 
 app.listen(process.env.PORT,async ()=>{
     //this callback function gets executed once we successfully start the server on given port
